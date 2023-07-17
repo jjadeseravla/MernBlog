@@ -32,11 +32,13 @@ export default function CreatePostPage() {
     data.set('content', content);
     data.set('file', files[0]);
     e.preventDefault();
+    // console.log(files, 'FILESSSS');
     const response = await fetch('http://localhost:4000/post', {
       method: 'POST',
       body: data,
     });
-    return response.json();
+    // return response.json();
+    console.log(await response.json());
   }
   
   return (
