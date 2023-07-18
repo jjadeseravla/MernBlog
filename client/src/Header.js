@@ -9,9 +9,12 @@ export default function Header() {
   // const [username, setUsername] = useState(null);
 
   useEffect(() => {
+    console.log('----------------0.11')
+
     fetch('http://localhost:4000/profile', {
       credentials: 'include',
     }).then(response => {
+      console.log('----------------1')
       response.json().then(jsonUserInfo => {
         // console.log(jsonUserInfo, 'why is this empty?!')
         // setUsername(jsonUserInfo.username);

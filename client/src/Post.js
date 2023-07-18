@@ -1,19 +1,23 @@
-export default function Post() {
+import { formatISO9075 } from 'date-fns';
+
+export default function Post({ title, summary, cover, content, createdAt, author }) {
   return (
 
     <div className="post">
       <div className="image">
-          <img src="nun.png" alt=""/>
+          <img src={`../../api/${cover}`} alt="coverimage"/>
           </div>
        <div className="text">
-          <h2>This is a second title</h2>
+        <h2>{title}</h2>
           <p className="info">
-            <a href='https://www.collinsdictionary.com/dictionary/spanish-english/avasallar' className="author">Jade Alvares</a>
-            <time>2023-01-06 16:45</time>
+          <a href='https://www.collinsdictionary.com/dictionary/spanish-english/avasallar' className="author">{author.username}</a>
+          <time>{ formatISO9075(new Date(createdAt), 'd MMM, yyyy, HH:mm')}</time>
           </p>
         <p className="summary">
-           Generate Lorem Ipsum placeholder text for use in your graphic, print and web layouts, and discover plugins for your favorite writing, design and blogging tools. Explore the origins, history and meaning of the famous passage, and learn how Lorem Ipsum went from scrambled Latin passage to ubiqitous
-         </p>
+            {summary}
+        </p>
+            {content}
+
       </div>
     </div>
   )
