@@ -19,6 +19,7 @@ const secret = "abc"
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(cookieParser());
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 mongoose.connect('mongodb+srv://blog:3i7QUIJSE8uB54S6@cluster0.r7g2hbm.mongodb.net/?retryWrites=true&w=majority')
 
@@ -76,6 +77,7 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
 
   const { token } = req.cookies;
   jwt.verify(token, secret, {}, async (err, info) => {
+    console.log('info-----------------', info);
     if (err) throw error;
     const { title, summary, content } = req.body;
     const postDoc = await Post.create({
@@ -86,12 +88,17 @@ app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
       author: info.id,
     });
     res.json(postDoc);
+    // console.log('postdoc-----------------', res.json(postDoc));
   });
 })
 
 app.get('/post', async (req, res) => {
-  const posts = (await Post.find().populate('author', ['username']));
-  res.json(posts);
+  res.json(
+    await Post.find()
+    .populate('author', ['username'])
+    .sort({ createdAt: -1 }) // latest post on top
+    .limit(20)
+  )
 });
 
 app.listen(4000);
