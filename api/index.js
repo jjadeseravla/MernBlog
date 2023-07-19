@@ -19,7 +19,7 @@ const secret = "abc"
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(cookieParser());
-app.use('/uploads', express.static(__dirname + '/uploads'));
+app.use('/uploads', express.static(__dirname + '/uploads')); // needed this line to get images to render
 
 mongoose.connect('mongodb+srv://blog:3i7QUIJSE8uB54S6@cluster0.r7g2hbm.mongodb.net/?retryWrites=true&w=majority')
 
@@ -100,6 +100,16 @@ app.get('/post', async (req, res) => {
     .limit(20)
   )
 });
+
+app.get('/post/:id', async (req, res) => {
+  // res.json(
+  //   await Post.find({ _id: req.params.id})
+  // )
+  const { id } = req.params;
+  const postDoc = await Post.findById(id);
+  res.json(postDoc)
+  // res.json({ test: 'test' })
+})
 
 app.listen(4000);
 // 3i7QUIJSE8uB54S6
