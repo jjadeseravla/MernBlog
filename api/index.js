@@ -106,7 +106,7 @@ app.get('/post/:id', async (req, res) => {
   //   await Post.find({ _id: req.params.id})
   // )
   const { id } = req.params;
-  const postDoc = await Post.findById(id);
+  const postDoc = await Post.findById(id).populate('author', ['username']);
   res.json(postDoc)
   // res.json({ test: 'test' })
 })

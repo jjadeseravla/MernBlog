@@ -22,7 +22,7 @@ export default function Post({ _id, title, summary, cover, content, createdAt, a
         <p className="summary">
             {summary}
         </p>
-            {content}
+            {/* {content} */}
 
       </div>
     </div>
