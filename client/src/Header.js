@@ -39,8 +39,9 @@ export default function Header() {
       <nav>
         {username && (
           <>
+            <span>Hello, {username}</span>
             <Link to="/create">Create new post</Link>
-            <a href='https://www.collinsdictionary.com/dictionary/spanish-english/avasallar' onClick={logout}>Logout</a>
+            <Link to='/' onClick={logout}>Logout</Link>
           </>
         )}
         {!username && (  

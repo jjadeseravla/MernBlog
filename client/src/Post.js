@@ -16,7 +16,7 @@ export default function Post({ _id, title, summary, cover, content, createdAt, a
         <h2>{title}</h2>
         </Link>
           <p className="info">
-          <a href='https://www.collinsdictionary.com/dictionary/spanish-english/avasallar' className="author">jade</a>
+          <Link to={'/'} className="author">jade</Link>
           <time>{ formatISO9075(new Date(createdAt), 'd MMM, yyyy, HH:mm')}</time>
           </p>
         <p className="summary">
